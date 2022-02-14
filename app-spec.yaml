@@ -1,0 +1,14 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+functions:
+- github:
+    branch: master
+    deploy_on_push: true
+    repo: digitalocean/sample-functions-python-jokes
+  name: jokes-api
+  routes:
+  - path: /
+  source_dir: /
+name: jokes
+region: blr
