@@ -1,60 +1,20 @@
-## Using Python to implement a slash command
+# Sample Function: Python Joke API
 
-The most convenient way to create a slash command to use with [Nimbella Commander](https://nimbella.com/integrations/commander) is to run `/nc command_create` and implementing the command in the provided editor. However this is not convenient for commands that require third party libraries, or when you want to use source control to manage your code.
+## Introduction
 
-An alternate approach is to use the [Nimbella CLI called `nim`](https://docs.nimbella.com/install). With `nim` you can develop and test your commands locally, commit the code to GitHub (or your favorite source control), and then deploy the project either by running `nim project deploy` yourself, or using a CI/CD process (e.g., GitHub actions).
+This repository contains a sample joke API function written in Python. You can deploy it on DigitalOcean's App Platform as a Serverless Function component.
 
-This `jokes` project is an example to illustrate how to create a slash command using Python as the programming language. The command generates jokes using the [`pyjokes`](https://pypi.org/project/pyjokes/) library.
+**Note: This feature is currently in a [limited beta release](https://docs.digitalocean.com/products/platform/product-lifecycle/#beta). Following these steps may result in charges for the use of DigitalOcean services.**
 
-## Project organization
+### Requirements
 
-There is only one command in this project. It is implemented by the `joke` API in [./packages/default/joke/__main__.py](./packages/default/joke/__main__.py). The code imports `pyjokes` (installed via [`requirements.txt`](./packages/default/joke/requirements.txt)), generates a new joke and formats the response for Commander.
+* You need a DigitalOcean account. If you don't already have one, you can sign up at [https://cloud.digitalocean.com/registrations/new](https://cloud.digitalocean.com/registrations/new).
+* You need to have access to the beta release of App Platform Serverless Functions. You can sign up for notifications about beta and early access releases [using this form](https://www.digitalocean.com/nimbella).
 
-## Installing the project with `nim`
+## Deploying the Function
 
-Before creating the slash command, we need to deploy the project. This is usually done with `/nc csm_install` from your messaging environment (e.g., Slack or Microsoft Teams). However `csm_install` currently does not support Python implementations of commands. So to accomplish the same goals, we will create the API ourselves:
+During the beta, documentation for Serverless Functions will be available to beta participants only in the [Serverless Functions Closed Beta Google Doc](https://docs.google.com/document/d/1qhxnl4ndb0Jh2WkNnNLa2lAUo6u7EAfLyBlUsaPZA0Y). Please refer to this document for instructions on how to deploy Serverless Functions in App Platform.
 
-```bash
-nim project deploy /path/to/demo-projects/jokes
-```
+### Learn More
 
-The output from `nim project deploy` will resemble the following:
-```
-> nim project deploy jokes
-Warning: found commands.yaml but no project.yml
-Deploying project '/path/to/projects/my-command-sets/jokes'
-  to namespace 'your-namespace'
-  on host 'https://your-host.nimbella.io'
-Started running ./build.sh in /path/to/demo-projects/jokes/default/joke
-Finished running ./build.sh in /path/to/demo-projects/jokes/default/joke
-Deployment status recorded in 'jokes/.nimbella'
-
-Deployed actions ('nim action get <actionName> --url' for URL):
-  - joke
-```
-
-The API is now live. We will need the URL for the API to use with [Commander as a webhook](https://nimbella.com/docs/commander/slack/reference#command_webhook). Running the command shown at the end of the project deploy command will produce the API endpoint you need.
-
-```
-nim action get joke --url
-```
-
-**Pro tip:** You can run `nim project deploy github:nimbella/demo-projects/jokes` to install the project directly from GitHub without cloning this project. The CLI may prompt you to login with GitHub to work around GitHub API rate limits. 
-
-## Creating the slash command
-
-Now you can create the command in your messaging environment. In Slack or Microsoft teams you will issue the following commands:
-```
-/nc command_create joke
-/nc command_webhook joke <joke-url-from-previous-step>
-```
-
-Note the second command which binds the slash command `joke` to the URL of your API. This invokes your API every time your command runs. 
-
-## Run your new command
-
-You are ready to use the slash command now. You can run it, and administer it like any other slash command.
-```
-/nc joke
-ASCII stupid question, get a stupid ANSI.
-```
+You can learn more about App Platform and how to manage and update your application in [the official App Platform Documentation](https://www.digitalocean.com/docs/app-platform/).
