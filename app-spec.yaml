@@ -11,4 +11,3 @@ functions:
   - path: /
   source_dir: /
 name: jokes
-region: blr
