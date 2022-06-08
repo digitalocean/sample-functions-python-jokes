@@ -1,5 +1,5 @@
 packages:
-  - name: default
+  - name: joke
     actions:
       - name: joke
         runtime: 'python:default'
