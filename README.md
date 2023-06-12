@@ -32,7 +32,7 @@ Deployed functions ('doctl sbx fn get <funcName> --url' for URL):
 
 ```
 # execute the function
-> doctl serverless functions invoke joke
+> doctl serverless functions invoke joke/joke
 {
   "body": {
     "response_type": "in_channel",
@@ -41,7 +41,7 @@ Deployed functions ('doctl sbx fn get <funcName> --url' for URL):
 }
 ```
 
-Note the CLI command can be abbreviated as `doctl sls fn invoke joke`.
+Note the CLI command can be abbreviated as `doctl sls fn invoke joke/joke`.
 
 
 ### Learn More
